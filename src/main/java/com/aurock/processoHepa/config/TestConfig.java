@@ -17,7 +17,7 @@ import com.aurock.processoHepa.repositories.SetorRepository;
  * Classe de configuração utilizando o perfil de test
  * */
 @Configuration
-@Profile("test")
+@Profile("dev")
 public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
