@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.aurock.processoHepa.entites.Funcionario;
 import com.aurock.processoHepa.services.FuncionarioService;
 
 @RestController
-@RequestMapping(value="/funcionario")
+@RequestMapping(value="/funcionarios")
 /*
  * Camada de recursos que poderão ser acessadas pelo usuário
  * 
@@ -40,6 +41,14 @@ public class FuncionarioResource {
 		return ResponseEntity.ok().body(funcionarios);
 	}
 	
+	@GetMapping(value="/home")
+	public ModelAndView getHome() {
+		//List<Funcionario> funcionarios = funcionarioService.findAll();
+		ModelAndView homePage = new ModelAndView("index");
+		//homePage.addObject("funcionarios",funcionarios);
+		return homePage;
+	}
+	
 	/* Metodo GET
 	 * Objetivo: Permite obter um registro do tipo funcionario passando como parâmetro o id
 	 * Retorno: Retorna o registro do funcionario encontrado no banco
@@ -54,6 +63,7 @@ public class FuncionarioResource {
 	 * Objetivo: Permite cadastrar um objeto do tipo funcionario
 	 * Retorno: Retorna respota 201 de criação com o caminho para o novo objeto
 	 * */
+	//@PostMapping(value="/funcionarios")
 	@PostMapping
 	public ResponseEntity<Funcionario> createFuncionario(@RequestBody Funcionario newFuncionario){
 		Funcionario response = funcionarioService.createFuncioanrio(newFuncionario);

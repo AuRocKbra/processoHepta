@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.aurock.processoHepa.entites.Funcionario;
 import com.aurock.processoHepa.repositories.FuncionarioRepository;
+import com.aurock.processoHepa.repositories.SetorRepository;
 
 
 /*
@@ -20,6 +21,9 @@ public class FuncionarioService {
 
 	@Autowired
 	private FuncionarioRepository funcionarioRepository;
+	
+	@Autowired
+	private SetorRepository setorRepository;
 	
 	/*
 	 * Objetivo: Permite obter lista completa de funcionarios cadastrados
@@ -42,11 +46,16 @@ public class FuncionarioService {
 	 * Retorno: Novo objeto do tipo funcioanrio
 	 * */
 	public Funcionario createFuncioanrio(Funcionario newFuncioanrio) {
-		if(funcionarioRepository.findByEmail(newFuncioanrio.getEmail()) != null) {
-			return null;
+		if(!setorRepository.findById(newFuncioanrio.getSetor().getId()).isEmpty()) {
+			if(funcionarioRepository.findByEmail(newFuncioanrio.getEmail()) == null) {
+				return funcionarioRepository.save(newFuncioanrio);
+			}
+			else {
+				return null;
+			}
 		}
 		else {
-			return funcionarioRepository.save(newFuncioanrio);
+			return null;
 		}
 	}
 	

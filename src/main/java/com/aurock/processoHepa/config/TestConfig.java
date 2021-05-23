@@ -17,22 +17,25 @@ import com.aurock.processoHepa.repositories.SetorRepository;
  * Classe de configuração utilizando o perfil de test
  * */
 @Configuration
-@Profile("dev")
+@Profile("test")
 public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private FuncionarioRepository funcionarioRepository;
 	
 	@Autowired
-	private SetorRepository setorRpository;
+	private SetorRepository setorRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
-		Setor s1 = new Setor(null, "RH");
 		
+		//setorRepository.deleteAll();
+		
+		Setor s1 = new Setor(null, "RH");
+		setorRepository.save(s1);
+		//funcionarioRepository.deleteAll();
 		Funcionario f1 = new Funcionario(null, "Bob", s1, 5000.00,"bob@gmail.com",35);	
 		Funcionario f2 = new Funcionario(null, "Sarah", s1, 5000.00,"sarah@gmail.com",30);
-		setorRpository.save(s1);
 		funcionarioRepository.saveAll(Arrays.asList(f1,f2));
 	}
 }
