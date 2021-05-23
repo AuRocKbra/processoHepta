@@ -36,4 +36,47 @@ public class FuncionarioService {
 	public Funcionario findById(Integer id) {
 		return funcionarioRepository.findById(id).get();
 	}
+	
+	/*
+	 * Objetivo: Permite criar um objeto do tipo funcionario
+	 * Retorno: Novo objeto do tipo funcioanrio
+	 * */
+	public Funcionario createFuncioanrio(Funcionario newFuncioanrio) {
+		if(funcionarioRepository.findByEmail(newFuncioanrio.getEmail()) != null) {
+			return null;
+		}
+		else {
+			return funcionarioRepository.save(newFuncioanrio);
+		}
+	}
+	
+	/*
+	 * Objetivo: Permite deletar um objeto do tipo funcionario
+	 * Retorno: Sem retorno
+	 * */
+	public void deletaFuncionario(Integer id) {
+		funcionarioRepository.delete(findById(id));
+	}
+	
+	/*
+	 * Objetivo: Permite atualizar os dados de um objeto do tipo funcioanrio
+	 * Retorno: O objeto do tipo funcionario com os dados atualizados 
+	 * */
+	public Funcionario updateFuncionario(Integer id, Funcionario funcionario) {
+		Funcionario oldFuncionario = funcionarioRepository.getOne(id);
+		atualizaDadosFuncionario(oldFuncionario,funcionario);
+		return funcionarioRepository.save(oldFuncionario);
+	}
+	
+	/*
+	 * Objetivo: Realiza a atualização dos dados dos entre dos dois objetos do tipo funcionario informados
+	 * Retorno: Sem retorno
+	 * */
+	private void atualizaDadosFuncionario(Funcionario oldDados, Funcionario newDados) {
+		oldDados.setNome(newDados.getNome());
+		oldDados.setSalario(newDados.getSalario());
+		oldDados.setSetor(newDados.getSetor());
+		oldDados.setIdade(newDados.getIdade());
+		oldDados.setEmail(newDados.getEmail());
+	}
 }

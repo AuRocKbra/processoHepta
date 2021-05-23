@@ -11,4 +11,6 @@ import com.aurock.processoHepa.entites.Funcionario;
  * */
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer>{
 
+		Funcionario findByEmail(String email);
+		
 }
