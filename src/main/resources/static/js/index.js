@@ -10,6 +10,7 @@ var inicio = new Vue({
 			{sortable: false, key: "email", label:"Email"},
 			{sortable: false, key: "idade", label:"Idade"}
 		],
+		editar:false
     },
     created: function(){
         let vm =  this;
@@ -24,7 +25,22 @@ var inicio = new Vue({
 				vm.mostraAlertaErro("Erro interno", "Não foi possível listar funcionários");
 			}).finally(function() {
 			});
-		}
+		},
+		removerFuncionario(id){
+			const vm = inicio;
+			axios.delete("/funcionarios/"+id).then(response =>{
+				vm.listaFuncionarios();
+			});
+		},
+		exibeEdicao(){
+			const vm = this;
+			if(vm.editar == false){
+				vm.editar = true;
+			}
+			else{
+				vm.editar = false;
+			}
+		},
     }
 });
 var cadastro = new Vue({
