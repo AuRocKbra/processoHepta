@@ -14,7 +14,7 @@
 <body>
 	<div class="row">
 		<div id="inicio" class="col-12 container-fluid table">
-			<div class="col-6">
+			<div class="col-12">
 				<h4>Lista dos Funcionários</h4>
 				<table style="overflow: scroll;">
 					<tr>
@@ -33,7 +33,7 @@
 							<td>{{ funcionario.salario }}</td> 
 							<td>{{ funcionario.email }}</td> 
 							<td>{{ funcionario.idade }}</td>
-							<td><span @click=""><button type="button" class="btn btn-warning btn-sm" v-on:click="exibeEdicao()">Editar</button></span>
+							<td><span @click=""><button type="button" class="btn btn-warning btn-sm" v-on:click="exibeEdicao(funcionario)">Editar</button></span>
 								<span  @click=""><button type="button" class="btn btn-danger btn-sm" v-on:click="removerFuncionario(funcionario.id)">Excluir</button></span>
 							</td>
 						</tr>
@@ -44,11 +44,11 @@
 				<h4>Formulário de edição de funcionário</h4>
 		  		<form v-on:submit.prevent="editaFuncionario">
 			  		<fieldset class="col-12">
-			  			<p><label for="nomeFuncionario">Nome:</label><input type="text" id="nomeFuncionario">
-			  			<p><label for="nomeSetor">Setor:</label><input type="text" id="nomeSetor">
-			  			<p><label for="valSalario">Salário:</label><input type="number" id="valSalario">
-			  			<p><label for="emailFuncionario">Email:</label><input type="email" id="emailFuncionario">
-			  			<p><label for="idadeFuncionario">Idade:</label><input type="number" id="idadeFuncionario">
+			  			<p><label for="nomeFuncionario">Nome:</label><input type="text" id="nomeFuncionario" v-model="func.nome">
+			  			<p><label for="nomeSetor">Setor:</label><input type="text" id="nomeSetor" v-model="func.setor.nome">
+			  			<p><label for="valSalario">Salário:</label><input type="number" id="valSalario" v-model="func.salario">
+			  			<p><label for="emailFuncionario">Email:</label><input type="email" id="emailFuncionario" v-model="func.email">
+			  			<p><label for="idadeFuncionario">Idade:</label><input type="number" id="idadeFuncionario" v-model="func.idade">
 			  		</fieldset>
 			  		<input type="submit" value="Alterar" class="btn btn-success btn-sm">
 		  		</form>
@@ -56,15 +56,15 @@
 		</div>
 	</div>
 	<div class="row">
-		<div id="form-newFuncionario" class="col-12 container-fluid">
+		<div id="form-newFuncionario" class="col-12 container-fluid" v-if="exibe">
 			<h4>Formulário de cadastro de funcionário</h4>
 			<form v-on:submit.prevent="addFuncionario">
 				<fieldset class="col-12">
-			  		<label for="nomeFuncionario" class="col-1">Nome:</label><input type="text" id="nomeFuncionario" v-model="form.nome" class="col-5">
-			  		<label for="nomeSetor" class="col-1">Setor:</label><input type="text" id="nomeSetor" v-model="form.setor.nome" class="col-5">
-			  		<label for="valSalario" class="col-1">Salário:</label><input type="number" id="valSalario" v-model="form.salario" class="col-5">
-			  		<label for="emailFuncionario" class="col-1">Email:</label><input type="email" id="emailFuncionario" v-model="form.email" class="col-5">
-			  		<label for="idadeFuncionario" class="col-1">Idade:</label><input type="number" id="idadeFuncionario" v-model="form.idade" class="col-6">
+			  		<p><label for="nomeFuncionario">Nome:</label><input type="text" id="nomeFuncionario" v-model="form.nome">
+			  		<p><label for="nomeSetor">Setor:</label><input type="text" id="nomeSetor" v-model="form.setor.nome">
+			  		<p><label for="valSalario">Salário:</label><input type="number" id="valSalario" v-model="form.salario">
+			  		<p><label for="emailFuncionario">Email:</label><input type="email" id="emailFuncionario" v-model="form.email">
+			  		<p><label for="idadeFuncionario">Idade:</label><input type="number" id="idadeFuncionario" v-model="form.idade">
 				</fieldset>
 				<input type="submit" value="Cadastrar" class="btn btn-success btn-sm">
 			 </form>

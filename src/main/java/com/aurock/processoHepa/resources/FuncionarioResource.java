@@ -81,7 +81,7 @@ public class FuncionarioResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	/* Metodo DELETE
+	/* Metodo PUT
 	 * Objetivo: Permite atualizar dados de um funcionario
 	 * Retorno: Retorna objeto do tipo funcionario com os dados atualizados	
 	 * */
