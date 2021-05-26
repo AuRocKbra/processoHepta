@@ -7,5 +7,4 @@ https://spring.io/tools
 que irá realizar um pré-preenchimento das tabelas. O outro perfil definido como dev, fara uso da configuração do datasource definido no próprio arquivo
 do perfil, no caso o mysql. Os arquivos em questão são o application-test.properties e o application-dev.properties respectivamente. Para alterar 
 entre as definições dos perfis, edite o arquivo application.properties, alterando o valor do parâmetro "spring.profiles.active" para "dev" ou "test".
-- Caso necessite, no projeto terá um script que pode ser usado pera dar carga no banco mysql.
-- Faça uso do setor "RH" no cadastro de novos funcioanrios. 
+- Caso necessite, no projeto terá um script que pode ser usado pera dar carga no banco mysql. 
