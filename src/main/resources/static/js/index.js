@@ -12,6 +12,7 @@ var inicio = new Vue({
 			{sortable: false, key: "idade", label:"Idade"}
 		],
 		editar:false,
+		exibeListar:true,
 		func:{
 			id:"",
 			nome:"",
@@ -31,10 +32,16 @@ var inicio = new Vue({
     methods:{
         listaFuncionarios: function(){
 			const vm = this;
+			const formCadastro = cadastro;
+			const btCad = btCadastro;
 			axios.get("/funcionarios")
-			.then(response => {vm.funcionarios = response.data;
+			.then(response => {
+				vm.funcionarios = response.data;
+				vm.exibeListar = true;
+				formCadastro.exibe = false;
+				btCad.exibe = true;
 			}).catch(function (error) {
-				vm.mostraAlertaErro("Erro interno", "Não foi possível listar funcionários");
+				//vm.mostraAlertaErro("Erro interno", "Não foi possível listar funcionários");
 			}).finally(function() {
 			});
 		},
@@ -47,9 +54,12 @@ var inicio = new Vue({
 		exibeEdicao(funcionario){
 			const vm = this;
 			const formCadastro = cadastro;
+			const btCad = btCadastro;
 			if(vm.editar == false){
 				vm.editar = true;
+				vm.exibeListar = false;
 				formCadastro.exibe = false;
+				btCad.exibe = false;
 				vm.func.id = funcionario.id;
 				vm.func.nome = funcionario.nome;
 				vm.func.setor.id = funcionario.setor.id;
@@ -60,7 +70,9 @@ var inicio = new Vue({
 			}
 			else{
 				vm.editar = false;
-				formCadastro.exibe = true;
+				formCadastro.exibe = false;
+				vm.exibeListar = true;
+				btCad.exibe = false;
 			}
 		},
 		editaFuncionario(){
@@ -71,6 +83,9 @@ var inicio = new Vue({
 				this.listaFuncionarios();
 			});
 		},
+		mostraAlertaErro(msg){
+		
+		}
     }
 });
 var cadastro = new Vue({
@@ -86,7 +101,7 @@ var cadastro = new Vue({
 			email:"",
 			idade:""
 		},
-		exibe:true
+		exibe:false
 	},
 	methods:{
 		addFuncionario(){
@@ -96,4 +111,20 @@ var cadastro = new Vue({
 			});
 		},
     }
+});
+
+var btCadastro = new Vue({
+	el:"#novoRegistro",
+	data:{
+		exibe:true
+	},
+	methods:{
+		exibeFormCadastro(){
+			const lista = inicio;
+			const formCadastro = cadastro;
+			this.exibe = false;
+			lista.exibeListar = false;
+			formCadastro.exibe = true;
+		},
+	}
 });

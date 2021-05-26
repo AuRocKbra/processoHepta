@@ -16,7 +16,7 @@
 		<div id="inicio" class="col-12 container-fluid table">
 			<div class="col-12">
 				<h4>Lista dos Funcionários</h4>
-				<table style="overflow: scroll;">
+				<table style="overflow: scroll;" v-if="exibeListar">
 					<tr>
 						<th>Nome</th>
 						<th>Setor</th>
@@ -70,6 +70,7 @@
 			 </form>
 		</div>
 	</div>
+	<button id="novoRegistro" type="button" class="btn btn-success btn-sm" v-if="exibe" v-on:click="exibeFormCadastro()">Novo Funcionario</button>
 	<script src="/js/vue.js"></script>
 	<script src="/js/axios.min.js"></script>
 	<script src="/js/index.js"></script>
