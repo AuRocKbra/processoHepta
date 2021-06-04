@@ -1,6 +1,5 @@
 package com.aurock.processoHepa.resources;
 
-import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.aurock.processoHepa.entites.Funcionario;
+import com.aurock.processoHepa.entites.dto.FuncionarioDto;
 import com.aurock.processoHepa.services.FuncionarioService;
 
 @RestController
@@ -36,8 +34,8 @@ public class FuncionarioResource {
 	 * Retorno: Lista de funcioanrios cadastrados
 	 * */
 	@GetMapping
-	public ResponseEntity<List<Funcionario>> findAll(){
-		List<Funcionario> funcionarios = funcionarioService.findAll(); 
+	public ResponseEntity<List<FuncionarioDto>> findAll(){
+		List<FuncionarioDto> funcionarios = funcionarioService.findAll(); 
 		return ResponseEntity.ok().body(funcionarios);
 	}
 	
@@ -54,8 +52,8 @@ public class FuncionarioResource {
 	 * Retorno: Retorna o registro do funcionario encontrado no banco
 	 * */
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Funcionario> findById(@PathVariable Integer id){
-		Funcionario funcionario = funcionarioService.findById(id);
+	public ResponseEntity<FuncionarioDto> findById(@PathVariable Integer id){
+		FuncionarioDto funcionario = funcionarioService.findById(id);
 		return ResponseEntity.ok().body(funcionario);
 	}
 	
@@ -65,10 +63,10 @@ public class FuncionarioResource {
 	 * */
 	//@PostMapping(value="/funcionarios")
 	@PostMapping
-	public ResponseEntity<Funcionario> createFuncionario(@RequestBody Funcionario newFuncionario){
-		Funcionario response = funcionarioService.createFuncioanrio(newFuncionario);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(response.getId()).toUri();
-		return ResponseEntity.created(uri).body(response);
+	public ResponseEntity<String> createFuncionario(@RequestBody FuncionarioDto newFuncionario){
+		String response = funcionarioService.createFuncioanrio(newFuncionario);
+		//URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(response.getId()).toUri();
+		return ResponseEntity.ok().body(response);
 	}
 	
 	/* Metodo DELETE
@@ -86,8 +84,8 @@ public class FuncionarioResource {
 	 * Retorno: Retorna objeto do tipo funcionario com os dados atualizados	
 	 * */
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Funcionario> updateFuncionario(@PathVariable Integer id, @RequestBody Funcionario newDados){
-		Funcionario response = funcionarioService.updateFuncionario(id, newDados);
+	public ResponseEntity<FuncionarioDto> updateFuncionario(@PathVariable Integer id, @RequestBody FuncionarioDto newDados){
+		FuncionarioDto response = funcionarioService.updateFuncionario(id, newDados);
 		return ResponseEntity.ok().body(response);
 	}
 }

@@ -6,4 +6,6 @@ import com.aurock.processoHepa.entites.Setor;
 
 public interface SetorRepository extends JpaRepository<Setor, Integer>{
 
+	Setor findByNome(String nome);
+	
 }

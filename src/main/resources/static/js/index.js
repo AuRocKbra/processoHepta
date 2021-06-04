@@ -5,7 +5,6 @@ var inicio = new Vue({
         listaProdutosHeader: [
         	{sortable: false, key: "id", label:"Id"},
 			{sortable: false, key: "nome", label:"Nome"},
-			{sortable: false, key: "setor.id", label:"IdSetor"},
 			{sortable: false, key: "setor.nome", label:"Setor"},
 			{sortable: false, key: "salario", label:"Salário"},
 			{sortable: false, key: "email", label:"Email"},
@@ -16,10 +15,7 @@ var inicio = new Vue({
 		func:{
 			id:"",
 			nome:"",
-			setor:{
-				id:"1",
-				nome:""
-			},
+			setor:"",
 			salario:"",
 			email:"",
 			idade:""
@@ -62,8 +58,7 @@ var inicio = new Vue({
 				btCad.exibe = false;
 				vm.func.id = funcionario.id;
 				vm.func.nome = funcionario.nome;
-				vm.func.setor.id = funcionario.setor.id;
-				vm.func.setor.nome = funcionario.setor.nome;
+				vm.func.setor = funcionario.setor;
 				vm.func.salario = funcionario.salario;
 				vm.func.email = funcionario.email;
 				vm.func.idade = funcionario.idade;
@@ -93,10 +88,7 @@ var cadastro = new Vue({
 	data:{
 		form:{
 			nome:"",
-			setor:{
-				id:"1",
-				nome:""
-			},
+			setor:"",
 			salario:"",
 			email:"",
 			idade:""
@@ -107,6 +99,13 @@ var cadastro = new Vue({
 		addFuncionario(){
 			const vm = inicio;
 			axios.post("/funcionarios",this.form).then(response => {
+				msg = response.data;
+				alert(msg);
+				this.form.nome = "";
+				this.form.setor = "";
+				this.form.salario = "";
+				this.form.email = "";
+				this.form.idade = "";
 				vm.listaFuncionarios(); 
 			});
 		},

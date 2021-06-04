@@ -29,7 +29,7 @@
 					<tbody id="event-table">
 						<tr v-for="funcionario in funcionarios">
 							<td>{{ funcionario.nome }}</td> 
-							<td>{{ funcionario.setor.nome }}</td> 
+							<td>{{ funcionario.setor }}</td> 
 							<td>{{ funcionario.salario }}</td> 
 							<td>{{ funcionario.email }}</td> 
 							<td>{{ funcionario.idade }}</td>
@@ -45,7 +45,7 @@
 		  		<form v-on:submit.prevent="editaFuncionario">
 			  		<fieldset class="col-12">
 			  			<p><label for="nomeFuncionario">Nome:</label><input type="text" id="nomeFuncionario" v-model="func.nome">
-			  			<p><label for="nomeSetor">Setor:</label><input type="text" id="nomeSetor" v-model="func.setor.nome">
+			  			<p><label for="nomeSetor">Setor:</label><input type="text" id="nomeSetor" v-model="func.setor">
 			  			<p><label for="valSalario">Salário:</label><input type="number" id="valSalario" v-model="func.salario">
 			  			<p><label for="emailFuncionario">Email:</label><input type="email" id="emailFuncionario" v-model="func.email">
 			  			<p><label for="idadeFuncionario">Idade:</label><input type="number" id="idadeFuncionario" v-model="func.idade">
@@ -61,7 +61,7 @@
 			<form v-on:submit.prevent="addFuncionario">
 				<fieldset class="col-12">
 			  		<p><label for="nomeFuncionario">Nome:</label><input type="text" id="nomeFuncionario" v-model="form.nome">
-			  		<p><label for="nomeSetor">Setor:</label><input type="text" id="nomeSetor" v-model="form.setor.nome">
+			  		<p><label for="nomeSetor">Setor:</label><input type="text" id="nomeSetor" v-model="form.setor">
 			  		<p><label for="valSalario">Salário:</label><input type="number" id="valSalario" v-model="form.salario">
 			  		<p><label for="emailFuncionario">Email:</label><input type="email" id="emailFuncionario" v-model="form.email">
 			  		<p><label for="idadeFuncionario">Idade:</label><input type="number" id="idadeFuncionario" v-model="form.idade">
